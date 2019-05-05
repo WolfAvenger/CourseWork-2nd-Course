@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -76,12 +76,13 @@ namespace Client2ndCourse
             {
                 string message;
 
-                BinaryFormatter fs = new BinaryFormatter();
-                using(FileStream stream = new FileStream("ser_data.txt", FileMode.Create))
+                using (FileStream stream = new FileStream("ser_data.txt", FileMode.Create))
                 {
+                    DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(CollectedInfo));
                     CollectedInfo info = PCStatus.CollectAllInfo();
-                    fs.Serialize(stream, info);
+                    js.WriteObject(stream, info);
                 }
+                
                 using(StreamReader streamr = new StreamReader(new FileStream("ser_data.txt", FileMode.Open)))
                 {
                     message = streamr.ReadToEnd();
@@ -106,6 +107,7 @@ namespace Client2ndCourse
             while (true)
             {
                 SendMessage();
+                Thread.Sleep(1000);
             }
         }
     }
