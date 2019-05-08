@@ -25,6 +25,7 @@ namespace Client2ndCourse
         static NetworkStream stream;
         Thread getting_info;
         ConnectingForm caller;
+        string current_ip = string.Empty;
 
 
         public ControllingForm(string host, string my_ip, ConnectingForm caller)
@@ -75,10 +76,25 @@ namespace Client2ndCourse
 
                     string received = builder.ToString();
 
-                    if (received.Contains("чат")) continue;
-                    using (StreamWriter w = new StreamWriter(new FileStream("get_info.txt", FileMode.Create)))
+                    if (current_ip.CompareTo("") == 0) continue;
+
+                    if (received.Contains("вошел в чат"))
                     {
+                        comps_listBox.Items.Add(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':')-1));
+                        continue;
+                    }
+                    else if (received.Contains("покинул чат"))
+                    {
+                        comps_listBox.Items.Remove(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':')-1));
+                        continue;
+                    }
+
+                    if (!received.Contains(current_ip)) continue;
+                    using (FileStream s = new FileStream("get_info.txt", FileMode.Create))
+                    {
+                        StreamWriter w = new StreamWriter(s);
                         w.WriteLine(received);
+                        w.Close();
                     }
                     CollectedInfo info;
                     using (FileStream s = new FileStream("get_info.txt", FileMode.Open))
@@ -87,7 +103,7 @@ namespace Client2ndCourse
                         info = (CollectedInfo)js.ReadObject(s);
                     }
 
-                    richTextBox1.Text = info.av_phys_mem.ToString();
+                    Edit_Boxes(info);
 
                 }
                 catch (Exception ex)
@@ -107,6 +123,39 @@ namespace Client2ndCourse
 
             Dispose();
             Close();
+            Environment.Exit(0);
+        }
+
+        void Edit_Boxes(CollectedInfo info)
+        {
+            string elems = "";
+            foreach (string elem in info.processes) elems += elem + "\r\n";
+            processes_richTextBox.Text = elems;
+
+            virtmem_richTextBox.Text = info.av_virt_mem.ToString();
+            physmem_richTextBox.Text = info.av_phys_mem.ToString();
+
+            proc_richTextBox.Text = info.cpu;
+
+            elems = "";
+            foreach (DiskInfo elem in info.disks_info)
+            {
+                elems += elem.GetFields();
+                elems += Environment.NewLine + "\r\n\n";
+            }
+            disks_richTextBox.Text = elems;
+
+            sys_richTextBox.Text = info.sys_info.GetFields();
+        }
+
+        private void comps_listBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            current_ip = comps_listBox.SelectedValue.ToString();
+        }
+
+        private void ControllingForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Disconnect();
             Environment.Exit(0);
         }
     }
