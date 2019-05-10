@@ -31,10 +31,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.processes_richTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.virtmem_richTextBox = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.physmem_richTextBox = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.physmem_richTextBox = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.virtmem_richTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.disks_richTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -84,24 +84,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Available Memory";
             // 
-            // virtmem_richTextBox
+            // label2
             // 
-            this.virtmem_richTextBox.Location = new System.Drawing.Point(160, 24);
-            this.virtmem_richTextBox.Name = "virtmem_richTextBox";
-            this.virtmem_richTextBox.ReadOnly = true;
-            this.virtmem_richTextBox.Size = new System.Drawing.Size(224, 30);
-            this.virtmem_richTextBox.TabIndex = 0;
-            this.virtmem_richTextBox.TabStop = false;
-            this.virtmem_richTextBox.Text = "";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Virtual (MB):";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 17);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Physical (MB):";
             // 
             // physmem_richTextBox
             // 
@@ -113,14 +103,24 @@
             this.physmem_richTextBox.TabStop = false;
             this.physmem_richTextBox.Text = "";
             // 
-            // label2
+            // label1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 17);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Physical (MB):";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Virtual (MB):";
+            // 
+            // virtmem_richTextBox
+            // 
+            this.virtmem_richTextBox.Location = new System.Drawing.Point(160, 24);
+            this.virtmem_richTextBox.Name = "virtmem_richTextBox";
+            this.virtmem_richTextBox.ReadOnly = true;
+            this.virtmem_richTextBox.Size = new System.Drawing.Size(224, 30);
+            this.virtmem_richTextBox.TabIndex = 0;
+            this.virtmem_richTextBox.TabStop = false;
+            this.virtmem_richTextBox.Text = "";
             // 
             // groupBox3
             // 
@@ -193,7 +193,7 @@
             this.comps_listBox.Name = "comps_listBox";
             this.comps_listBox.Size = new System.Drawing.Size(241, 708);
             this.comps_listBox.TabIndex = 5;
-            this.comps_listBox.SelectedValueChanged += new System.EventHandler(this.comps_listBox_SelectedValueChanged);
+            this.comps_listBox.SelectedIndexChanged += new System.EventHandler(this.comps_listBox_SelectedIndexChanged);
             // 
             // ControllingForm
             // 

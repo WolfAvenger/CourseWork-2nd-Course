@@ -26,7 +26,7 @@ namespace Client2ndCourse
         static NetworkStream stream;
         Thread getting_info;
         ConnectingForm caller;
-        string current_ip = string.Empty;
+        string current_ip = "";
 
 
         public ControllingForm(string host, string my_ip, ConnectingForm caller)
@@ -77,18 +77,20 @@ namespace Client2ndCourse
 
                     string received = builder.ToString();
 
-                    if (current_ip.CompareTo("") == 0) continue;
-
-                    if (received.Contains("вошел в чат"))
+                    if (received.Contains("on a server"))
                     {
                         comps_listBox.Items.Add(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':')-1));
+                        comps_listBox.Update();
                         continue;
                     }
-                    else if (received.Contains("покинул чат"))
+                    else if (received.Contains("left the server"))
                     {
                         comps_listBox.Items.Remove(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':')-1));
+                        comps_listBox.Update();
                         continue;
                     }
+
+                    if (current_ip.CompareTo("") == 0) continue;
 
                     if (!received.Contains(current_ip)) continue;
                     using (FileStream s = new FileStream("get_info.txt", FileMode.Create))
@@ -111,7 +113,7 @@ namespace Client2ndCourse
                 catch (IOException ex) { }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + " " + ex.StackTrace + "\r\n" +ex.GetType().ToString()); //соединение было прервано
+                    MessageBox.Show(ex.Message);              //соединение было прервано
                                                               //Debug.ReadLine();
                     Disconnect();
                 }
@@ -159,7 +161,18 @@ namespace Client2ndCourse
         private void ControllingForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Disconnect();
-            Environment.Exit(0);
+        }
+
+        private void comps_listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                current_ip = comps_listBox.Items[comps_listBox.SelectedIndex].ToString();
+            }
+            catch(Exception ex)
+            {
+                current_ip = "";
+            }
         }
     }
 }
