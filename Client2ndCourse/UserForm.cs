@@ -88,7 +88,6 @@ namespace Client2ndCourse
                     message = streamr.ReadToEnd();
                 }
 
-
                 byte[] data = Encoding.Unicode.GetBytes(message);
                 stream.Write(data, 0, data.Length);
             }
