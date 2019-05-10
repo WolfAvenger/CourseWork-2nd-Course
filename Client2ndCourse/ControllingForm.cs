@@ -28,6 +28,7 @@ namespace Client2ndCourse
         Thread getting_info;
         ConnectingForm caller;
         string current_ip = "";
+        RichTextBox[] boxes;
 
 
         public ControllingForm(string host, string my_ip, ConnectingForm caller)
@@ -36,6 +37,8 @@ namespace Client2ndCourse
             this.host = host;
             user_ip = my_ip;
             this.caller = caller;
+            boxes = new RichTextBox[] { processes_richTextBox, disks_richTextBox, virtmem_richTextBox,
+                                        physmem_richTextBox, sys_richTextBox, proc_richTextBox };
         }
 
         private void ControllingForm_Load(object sender, EventArgs e)
@@ -102,8 +105,21 @@ namespace Client2ndCourse
                     }
                     else if (received.Contains("left the server"))
                     {
-                        comps_listBox.Items.Remove(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':')-1));
-                        comps_listBox.Update();
+
+                        if (comps_listBox.InvokeRequired)
+                        {
+                            comps_listBox.Invoke(new MethodInvoker(delegate
+                            {
+                                comps_listBox.Items.Remove(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':') - 1));
+                                comps_listBox.Update();
+                            }));
+                            continue;
+                        }
+                        else
+                        {
+                            comps_listBox.Items.Remove(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':') - 1));
+                            comps_listBox.Update();
+                        }
                         continue;
                     }
 
@@ -112,10 +128,7 @@ namespace Client2ndCourse
                     if (!received.Contains(current_ip)) continue;
 
                     CollectedInfo info;
-
                     info = JsonConvert.DeserializeObject<CollectedInfo>(received);
-
-                    MessageBox.Show(received);
 
                     Edit_Boxes(info);
 
@@ -245,6 +258,21 @@ namespace Client2ndCourse
             {
                 current_ip = "";
                 ip_label.Text = current_ip;
+                foreach(RichTextBox textBox in boxes)
+                {
+                    if (textBox.InvokeRequired)
+                    {
+                        comps_listBox.Invoke(new MethodInvoker(delegate
+                        {
+                            textBox.Text = string.Empty;
+                        }));
+                        continue;
+                    }
+                    else
+                    {
+                        textBox.Text = string.Empty;
+                    }
+                }
             }
         }
     }

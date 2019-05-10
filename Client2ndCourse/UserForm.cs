@@ -81,9 +81,8 @@ namespace Client2ndCourse
                 CollectedInfo info = PCStatus.CollectAllInfo();
                 message = JsonConvert.SerializeObject(info);
 
-                MessageBox.Show(message);
-
                 byte[] data = Encoding.Unicode.GetBytes(message);
+                Thread.Sleep(300);
                 stream.Write(data, 0, data.Length);
             }
             catch (Exception ex)
