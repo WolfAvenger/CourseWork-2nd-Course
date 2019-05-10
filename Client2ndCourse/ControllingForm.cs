@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
@@ -106,6 +107,8 @@ namespace Client2ndCourse
                     Edit_Boxes(info);
 
                 }
+                catch (SerializationException ex) { }
+                catch (IOException ex) { }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message + " " + ex.StackTrace); //соединение было прервано
@@ -141,7 +144,7 @@ namespace Client2ndCourse
             foreach (DiskInfo elem in info.disks_info)
             {
                 elems += elem.GetFields();
-                elems += Environment.NewLine + "\r\n\n";
+                elems += Environment.NewLine + "\r\n";
             }
             disks_richTextBox.Text = elems;
 
