@@ -136,8 +136,9 @@ namespace Client2ndCourse
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message + "\r\n" + ex.StackTrace);              //соединение было прервано
-                                                              //Debug.ReadLine();
-                    Disconnect();
+                                                                                       //Debug.ReadLine();
+                                                                                       //Disconnect();
+                    Environment.Exit(0);
                 }
             }
         }

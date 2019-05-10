@@ -68,6 +68,8 @@ namespace Client2ndCourse
 
         private void UserForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            sending_info.Interrupt();
+            Close();
             Environment.Exit(0);
         }
 
@@ -82,7 +84,7 @@ namespace Client2ndCourse
                 message = JsonConvert.SerializeObject(info);
 
                 byte[] data = Encoding.Unicode.GetBytes(message);
-                Thread.Sleep(300);
+                Thread.Sleep(40);
                 stream.Write(data, 0, data.Length);
             }
             catch (Exception ex)
