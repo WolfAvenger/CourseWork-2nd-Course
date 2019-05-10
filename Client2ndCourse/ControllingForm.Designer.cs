@@ -42,6 +42,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.sys_richTextBox = new System.Windows.Forms.RichTextBox();
             this.comps_listBox = new System.Windows.Forms.ListBox();
+            this.ip_label = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -191,15 +192,25 @@
             this.comps_listBox.ItemHeight = 16;
             this.comps_listBox.Location = new System.Drawing.Point(13, 13);
             this.comps_listBox.Name = "comps_listBox";
-            this.comps_listBox.Size = new System.Drawing.Size(241, 708);
+            this.comps_listBox.Size = new System.Drawing.Size(241, 676);
             this.comps_listBox.TabIndex = 5;
             this.comps_listBox.SelectedIndexChanged += new System.EventHandler(this.comps_listBox_SelectedIndexChanged);
+            // 
+            // ip_label
+            // 
+            this.ip_label.AutoSize = true;
+            this.ip_label.Location = new System.Drawing.Point(13, 703);
+            this.ip_label.Name = "ip_label";
+            this.ip_label.Size = new System.Drawing.Size(75, 17);
+            this.ip_label.TabIndex = 6;
+            this.ip_label.Text = "Current IP:";
             // 
             // ControllingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1186, 732);
+            this.Controls.Add(this.ip_label);
             this.Controls.Add(this.comps_listBox);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -217,6 +228,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -236,6 +248,7 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.RichTextBox sys_richTextBox;
         private System.Windows.Forms.ListBox comps_listBox;
+        private System.Windows.Forms.Label ip_label;
     }
 }
 

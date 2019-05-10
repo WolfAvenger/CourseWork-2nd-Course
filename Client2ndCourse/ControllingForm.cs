@@ -109,8 +109,8 @@ namespace Client2ndCourse
                     Edit_Boxes(info);
 
                 }
-                catch (SerializationException ex) { }
-                catch (IOException ex) { }
+                catch (SerializationException ex) { MessageBox.Show(ex.Message); }
+                catch (IOException ex) { MessageBox.Show(ex.Message); }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);              //соединение было прервано
@@ -168,10 +168,12 @@ namespace Client2ndCourse
             try
             {
                 current_ip = comps_listBox.Items[comps_listBox.SelectedIndex].ToString();
+                ip_label.Text = current_ip;
             }
             catch(Exception ex)
             {
                 current_ip = "";
+                ip_label.Text = current_ip;
             }
         }
     }
