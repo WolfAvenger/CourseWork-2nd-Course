@@ -101,7 +101,7 @@ namespace Client2ndCourse
                             comps_listBox.Items.Add(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':') - 1));
                             comps_listBox.Update();
                         }
-                        
+
                     }
                     else if (received.Contains("left the server"))
                     {
@@ -133,6 +133,7 @@ namespace Client2ndCourse
                     Edit_Boxes(info);
 
                 }
+                catch (JsonException ex) { }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message + "\r\n" + ex.StackTrace);              //соединение было прервано
