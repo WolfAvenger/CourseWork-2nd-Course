@@ -109,8 +109,8 @@ namespace Client2ndCourse
                     Edit_Boxes(info);
 
                 }
-                catch (SerializationException ex) { MessageBox.Show(ex.Message + "\r\n"); }
-                catch (IOException ex) { MessageBox.Show(ex.Message); }
+                catch (SerializationException ex) { }
+                catch (IOException ex) { }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);              //соединение было прервано
