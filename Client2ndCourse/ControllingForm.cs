@@ -78,7 +78,7 @@ namespace Client2ndCourse
                         builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                         received += builder.ToString();
                         builder.Clear();
-                        Thread.Sleep(300);
+                        Thread.Sleep(40);
                     }
                     while (stream.DataAvailable);
 
