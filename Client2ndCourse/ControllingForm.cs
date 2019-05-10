@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using PCStatusLib;
 
 namespace Client2ndCourse
@@ -93,18 +94,12 @@ namespace Client2ndCourse
                     if (current_ip.CompareTo("") == 0) continue;
 
                     if (!received.Contains(current_ip)) continue;
-                    using (FileStream s = new FileStream("get_info.txt", FileMode.Create))
-                    {
-                        StreamWriter w = new StreamWriter(s);
-                        w.WriteLine(received);
-                        w.Close();
-                    }
+
                     CollectedInfo info;
-                    using (FileStream s = new FileStream("get_info.txt", FileMode.Open))
-                    {
-                        DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(CollectedInfo));
-                        info = (CollectedInfo)js.ReadObject(s);
-                    }
+
+                    info = JsonConvert.DeserializeObject<CollectedInfo>(received);
+
+                    MessageBox.Show(received);
 
                     Edit_Boxes(info);
 

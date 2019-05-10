@@ -7,11 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PCStatusLib;
+using Newtonsoft.Json;
 
 namespace Client2ndCourse
 {
@@ -76,17 +78,10 @@ namespace Client2ndCourse
             {
                 string message;
 
-                using (FileStream stream = new FileStream("ser_data.txt", FileMode.Create))
-                {
-                    DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(CollectedInfo));
-                    CollectedInfo info = PCStatus.CollectAllInfo();
-                    js.WriteObject(stream, info);
-                }
-                
-                using(StreamReader streamr = new StreamReader(new FileStream("ser_data.txt", FileMode.Open)))
-                {
-                    message = streamr.ReadToEnd();
-                }
+                CollectedInfo info = PCStatus.CollectAllInfo();
+                message = JsonConvert.SerializeObject(info);
+
+                MessageBox.Show(message);
 
                 byte[] data = Encoding.Unicode.GetBytes(message);
                 stream.Write(data, 0, data.Length);

@@ -40,3 +40,5 @@ C:\Users\user\Desktop\CourseWork-2nd-Course\Client2ndCourse\obj\Debug\Client2ndC
 C:\Users\user\Desktop\CourseWork-2nd-Course\Client2ndCourse\obj\Debug\Client2ndCourse.csproj.CopyComplete
 C:\Users\user\Desktop\CourseWork-2nd-Course\Client2ndCourse\obj\Debug\Client2ndCourse.exe
 C:\Users\user\Desktop\CourseWork-2nd-Course\Client2ndCourse\obj\Debug\Client2ndCourse.pdb
+C:\Users\user\Desktop\CourseWork-2nd-Course\Client2ndCourse\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user\Desktop\CourseWork-2nd-Course\Client2ndCourse\bin\Debug\Newtonsoft.Json.xml
