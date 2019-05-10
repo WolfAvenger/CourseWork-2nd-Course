@@ -111,7 +111,7 @@ namespace Client2ndCourse
                 catch (IOException ex) { }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + " " + ex.StackTrace); //соединение было прервано
+                    MessageBox.Show(ex.Message + " " + ex.StackTrace + "\r\n" +ex.GetType().ToString()); //соединение было прервано
                                                               //Debug.ReadLine();
                     Disconnect();
                 }
