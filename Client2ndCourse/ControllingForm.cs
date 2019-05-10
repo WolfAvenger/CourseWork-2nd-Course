@@ -65,24 +65,40 @@ namespace Client2ndCourse
             {
                 try
                 {
-                    byte[] data = new byte[64]; // буфер для получаемых данных
+                    byte[] data = new byte[4096]; // буфер для получаемых данных
                     StringBuilder builder = new StringBuilder();
                     int bytes = 0;
+                    string received = "";
                     do
                     {
                         bytes = stream.Read(data, 0, data.Length);
                         builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                        received += builder.ToString();
+                        builder.Clear();
+                        Thread.Sleep(300);
                     }
                     while (stream.DataAvailable);
 
-
-                    string received = builder.ToString();
+                    received.Replace(" ", "");
+                    received.Replace("\n", "");
 
                     if (received.Contains("on a server"))
                     {
-                        comps_listBox.Items.Add(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':')-1));
-                        comps_listBox.Update();
-                        continue;
+                        if (comps_listBox.InvokeRequired)
+                        {
+                            comps_listBox.Invoke(new MethodInvoker(delegate
+                            {
+                                comps_listBox.Items.Add(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':') - 1));
+                                comps_listBox.Update();
+                            }));
+                            continue;
+                        }
+                        else
+                        {
+                            comps_listBox.Items.Add(received.Substring(received.IndexOf(':') + 1, received.LastIndexOf(':') - received.IndexOf(':') - 1));
+                            comps_listBox.Update();
+                        }
+                        
                     }
                     else if (received.Contains("left the server"))
                     {
@@ -104,11 +120,9 @@ namespace Client2ndCourse
                     Edit_Boxes(info);
 
                 }
-                catch (SerializationException ex) { }
-                catch (IOException ex) { }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);              //соединение было прервано
+                    MessageBox.Show(ex.Message + "\r\n" + ex.StackTrace);              //соединение было прервано
                                                               //Debug.ReadLine();
                     Disconnect();
                 }
@@ -121,8 +135,6 @@ namespace Client2ndCourse
             if (client != null)
                 client.Close();//отключение клиента
 
-            Dispose();
-            Close();
             Environment.Exit(0);
         }
 
@@ -130,12 +142,54 @@ namespace Client2ndCourse
         {
             string elems = "";
             foreach (string elem in info.processes) elems += elem + "\r\n";
-            processes_richTextBox.Text = elems;
 
-            virtmem_richTextBox.Text = info.av_virt_mem.ToString();
-            physmem_richTextBox.Text = info.av_phys_mem.ToString();
+            if (processes_richTextBox.InvokeRequired)
+            {
+                processes_richTextBox.Invoke(new MethodInvoker(delegate
+                {
+                    processes_richTextBox.Text = elems;
+                }));
+            }
+            else
+            {
+                processes_richTextBox.Text = elems;
+            }
 
-            proc_richTextBox.Text = info.cpu;
+            if (virtmem_richTextBox.InvokeRequired)
+            {
+                virtmem_richTextBox.Invoke(new MethodInvoker(delegate
+                {
+                    virtmem_richTextBox.Text = info.av_virt_mem.ToString();
+                }));
+            }
+            else
+            {
+                virtmem_richTextBox.Text = info.av_virt_mem.ToString();
+            }
+
+            if (physmem_richTextBox.InvokeRequired)
+            {
+                physmem_richTextBox.Invoke(new MethodInvoker(delegate
+                {
+                    physmem_richTextBox.Text = info.av_phys_mem.ToString();
+                }));
+            }
+            else
+            {
+                physmem_richTextBox.Text = info.av_phys_mem.ToString();
+            }
+
+            if (proc_richTextBox.InvokeRequired)
+            {
+                proc_richTextBox.Invoke(new MethodInvoker(delegate
+                {
+                    proc_richTextBox.Text = info.cpu;
+                }));
+            }
+            else
+            {
+                proc_richTextBox.Text = info.cpu;
+            }
 
             elems = "";
             foreach (DiskInfo elem in info.disks_info)
@@ -143,9 +197,31 @@ namespace Client2ndCourse
                 elems += elem.GetFields();
                 elems += Environment.NewLine + "\r\n";
             }
-            disks_richTextBox.Text = elems;
 
-            sys_richTextBox.Text = info.sys_info.GetFields();
+            if (disks_richTextBox.InvokeRequired)
+            {
+                disks_richTextBox.Invoke(new MethodInvoker(delegate
+                {
+                    disks_richTextBox.Text = elems;
+                }));
+            }
+            else
+            {
+                disks_richTextBox.Text = elems;
+            }
+
+            if (sys_richTextBox.InvokeRequired)
+            {
+                sys_richTextBox.Invoke(new MethodInvoker(delegate
+                {
+                    sys_richTextBox.Text = info.sys_info.GetFields();
+                }));
+            }
+            else
+            {
+                sys_richTextBox.Text = info.sys_info.GetFields();
+            }
+
         }
 
         private void comps_listBox_SelectedValueChanged(object sender, EventArgs e)
