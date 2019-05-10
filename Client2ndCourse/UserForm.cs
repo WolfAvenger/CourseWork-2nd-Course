@@ -94,7 +94,7 @@ namespace Client2ndCourse
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Сервер был отключен. Обратитесь к содержащему сервер пользователю. " + ex.Message);
+                MessageBox.Show(ex.Message + " \r\n" + ex.StackTrace);
                 Dispose();
                 Close();
                 sending_info.Interrupt();
