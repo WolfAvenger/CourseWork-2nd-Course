@@ -123,12 +123,13 @@ namespace Client2ndCourse
                         continue;
                     }
 
+                    CollectedInfo info;
+                    info = JsonConvert.DeserializeObject<CollectedInfo>(received);
+                    if (info.need_alert) ShowAlert(info.ip);
+
                     if (current_ip.CompareTo("") == 0) continue;
 
                     if (!received.Contains(current_ip)) continue;
-
-                    CollectedInfo info;
-                    info = JsonConvert.DeserializeObject<CollectedInfo>(received);
 
                     Edit_Boxes(info);
 
@@ -237,6 +238,11 @@ namespace Client2ndCourse
                 sys_richTextBox.Text = info.sys_info.GetFields();
             }
 
+        }
+
+        void ShowAlert(string ip)
+        {
+            MessageBox.Show("PC with IP " + ip + " has deviation with usage of virtual or physical memory.");
         }
 
         private void comps_listBox_SelectedValueChanged(object sender, EventArgs e)

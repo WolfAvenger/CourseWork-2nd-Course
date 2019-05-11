@@ -44,7 +44,7 @@ namespace Client2ndCourse
             {
                 UserForm user_form = new UserForm(host, my_ip, this);
                 user_form.Show();
-                this.Hide();
+                Hide();
             }
 
         }
