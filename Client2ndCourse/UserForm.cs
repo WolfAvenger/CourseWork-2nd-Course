@@ -52,8 +52,7 @@ namespace Client2ndCourse
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Введенный сервер недоступен или выключен. Перезапустите программу и введите IPv4-адрес доступного сервера. " + ex.Message, " Ошибка подключения к серверу");
-                Dispose();
+                MessageBox.Show("Введенный сервер недоступен или выключен. Перезапустите программу и введите IPv4-адрес доступного сервера. " + ex.Message + " Ошибка подключения к серверу");
                 Close();
                 caller.Show();
                 return;
@@ -68,9 +67,7 @@ namespace Client2ndCourse
 
         private void UserForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            sending_info.Interrupt();
-            Close();
-            Environment.Exit(0);
+            sending_info.Abort();
         }
 
         public void SendMessage()
@@ -103,6 +100,12 @@ namespace Client2ndCourse
                 SendMessage();
                 Thread.Sleep(2000);
             }
+        }
+
+        private void UserForm_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            sending_info.Abort();
+            Environment.Exit(0);
         }
     }
 }

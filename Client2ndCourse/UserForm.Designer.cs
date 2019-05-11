@@ -52,7 +52,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "UserForm";
             this.Text = "Controller";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserForm_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing_1);
             this.Load += new System.EventHandler(this.UserForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
