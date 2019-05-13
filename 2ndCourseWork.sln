@@ -5,11 +5,9 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client2ndCourse", "Client2ndCourse\Client2ndCourse.csproj", "{E798C84C-BF4C-4AFB-B272-1458D3787EF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCStatusLib", "..\PCStatusLib\PCStatusLib\PCStatusLib.csproj", "{D8A80287-1CDD-442E-8881-7C52DE11258B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCStatusLib", "PCStatusLib\PCStatusLib.csproj", "{D8A80287-1CDD-442E-8881-7C52DE11258B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "..\HSE\SocketServer v2\Client\Client.csproj", "{4CBD74B5-1366-4737-8BB9-6D77D4665C7F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "..\HSE\SocketServer v2\Server\Server.csproj", "{3984CA71-1201-4190-8C15-CBD26F1524E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{3984CA71-1201-4190-8C15-CBD26F1524E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{D8A80287-1CDD-442E-8881-7C52DE11258B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8A80287-1CDD-442E-8881-7C52DE11258B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8A80287-1CDD-442E-8881-7C52DE11258B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CBD74B5-1366-4737-8BB9-6D77D4665C7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CBD74B5-1366-4737-8BB9-6D77D4665C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CBD74B5-1366-4737-8BB9-6D77D4665C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CBD74B5-1366-4737-8BB9-6D77D4665C7F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3984CA71-1201-4190-8C15-CBD26F1524E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3984CA71-1201-4190-8C15-CBD26F1524E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3984CA71-1201-4190-8C15-CBD26F1524E3}.Release|Any CPU.ActiveCfg = Release|Any CPU

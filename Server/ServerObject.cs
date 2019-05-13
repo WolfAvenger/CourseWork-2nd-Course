@@ -49,21 +49,25 @@ namespace Server
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Disconnect();
+                //Disconnect();
             }
         }
 
         // трансляция сообщения подключенным клиентам
         protected internal void BroadcastMessage(string message, string id)
         {
-            byte[] data = Encoding.Unicode.GetBytes(message);
-            for (int i = 0; i < clients.Count; i++)
+            try
             {
-                if (clients[i].Id != id) // если id клиента не равно id отправляющего
+                byte[] data = Encoding.Unicode.GetBytes(message);
+                for (int i = 0; i < clients.Count; i++)
                 {
-                    clients[i].Stream.Write(data, 0, data.Length); //передача данных
+                    if (clients[i].Id != id) // если id клиента не равно id отправляющего
+                    {
+                        clients[i].Stream.Write(data, 0, data.Length); //передача данных
+                    }
                 }
             }
+            catch { }
         }
 
         // отключение всех клиентов

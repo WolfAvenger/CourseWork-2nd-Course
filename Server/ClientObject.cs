@@ -38,7 +38,7 @@ namespace Server
                 message = userName + ": is on a server";
                 // посылаем сообщение о входе в чат всем подключенным пользователям
                 server.BroadcastMessage(message, this.Id);
-                Console.WriteLine(message);
+                //Console.WriteLine(message);
                 // в бесконечном цикле получаем сообщения от клиента
                 while (true)
                 {
@@ -47,13 +47,13 @@ namespace Server
                         message = GetMessage();
                         //Console.WriteLine(message);
                         //message = String.Format(/*"{0}: */"{0}", /*userName,*/ message);
-                        Console.WriteLine(message);
+                        //Console.WriteLine(message);
                         server.BroadcastMessage(message, this.Id);
                     }
                     catch
                     {
                         message = String.Format("{0}: left the server", userName);
-                        Console.WriteLine(message);
+                        //Console.WriteLine(message);
                         server.BroadcastMessage(message, this.Id);
                         break;
                     }
@@ -65,8 +65,11 @@ namespace Server
             }
             finally
             {
-                // в случае выхода из цикла закрываем ресурсы
-                server.RemoveConnection(this.Id);
+                try
+                {
+                    // в случае выхода из цикла закрываем ресурсы
+                    server.RemoveConnection(this.Id);
+                } catch { }
                 Close();
             }
         }

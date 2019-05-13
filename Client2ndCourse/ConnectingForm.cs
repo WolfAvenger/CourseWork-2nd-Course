@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Server;
-using Client;
 using System.Net;
 
 namespace Client2ndCourse

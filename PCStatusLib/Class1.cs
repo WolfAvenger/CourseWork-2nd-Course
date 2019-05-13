@@ -7,6 +7,8 @@ using System.Management;
 using Microsoft.VisualBasic.Devices;
 using System.Diagnostics;
 using System.Threading;
+using System.Runtime.Serialization;
+using System.Net;
 
 namespace PCStatusLib
 {
@@ -15,6 +17,14 @@ namespace PCStatusLib
 	/// </summary>
     public static class PCStatus
     {
+
+        public static CollectedInfo CollectAllInfo()
+        {
+            return new CollectedInfo(ActiveProcesses(), SystemInfo(), DisksInfo(), VideoControllersInfo(),
+                                     AvailablePhysicalMemory(2), AvailableVirtualMemory(2), "CPU"/*CPULoad()*/, false);
+        }
+
+
 		/// <summary>
 		/// Метод, возвращающий список названий активных процессов ПК, отсортированный в алфавитном порядке.
 		/// </summary>
@@ -215,7 +225,7 @@ namespace PCStatusLib
         /// </summary>
         /// <param name="reg">Параметр вывода от 0 до 4 (от байт до терабайт соотв.)</param>
         /// <returns></returns>
-        public static double AvailibleVirtualMemory(byte reg)
+        public static double AvailableVirtualMemory(byte reg)
         {
             ComputerInfo ci = new ComputerInfo();
             double ret;
@@ -270,6 +280,42 @@ namespace PCStatusLib
         }
     }
 
+    [DataContract]
+    public class CollectedInfo
+    {
+        [DataMember]
+        public List<string> processes;
+        [DataMember]
+        public OperatingSystemInfo sys_info;
+        [DataMember]
+        public List<DiskInfo> disks_info;
+        [DataMember]
+        public List<VideoControllerInfo> vid_info;
+        [DataMember]
+        public double av_phys_mem, av_virt_mem;
+        [DataMember]
+        public string cpu;
+        [DataMember]
+        public string ip;
+        [DataMember]
+        public bool need_alert;
+
+        public CollectedInfo(List<string> processes, OperatingSystemInfo sys_info, List<DiskInfo> disks_info,
+                             List<VideoControllerInfo> vid_info,
+                             double av_phys_mem, double av_virt_mem, string cpu, bool alert)
+        {
+            this.processes = processes;
+            this.sys_info = sys_info;
+            this.disks_info = disks_info;
+            this.vid_info = vid_info;
+            this.av_phys_mem = av_phys_mem;
+            this.av_virt_mem = av_virt_mem;
+            this.cpu = "CPU";
+            ip = Dns.GetHostByName(Dns.GetHostName()).AddressList[0].ToString();
+            need_alert = alert;
+        }
+    }
+
     #region Classes
 
     /// <summary>
@@ -311,22 +357,22 @@ namespace PCStatusLib
     [Serializable]
 	public class OperatingSystemInfo
 	{
-		public int BuildNumber { get; private set; }
-		public string Caption { get; private set; }
-		public uint FreePhysicalMemory { get; private set; }
-		public uint FreeVirtualMemory { get; private set; }
-		public string Name { get; private set; }
-		public int OSType { get; private set; }
-		public string RegisteredUser { get; private set; }
-		public string Serial { get; private set; }
-		public int ServiceMajorVersion { get; private set; }
-		public int ServiceMinorVersion { get; private set; }
-		public string Status { get; private set; }
-		public string SystemDevice { get; private set; }
-		public string SystemDirectory { get; private set; }
-		public string SystemDrive { get; private set; }
-		public string Version { get; private set; }
-		public string WindowsDirectory { get; private set; }
+		public int BuildNumber { get; set; }
+		public string Caption { get; set; }
+		public uint FreePhysicalMemory { get; set; }
+		public uint FreeVirtualMemory { get; set; }
+		public string Name { get; set; }
+		public int OSType { get; set; }
+		public string RegisteredUser { get; set; }
+		public string Serial { get; set; }
+		public int ServiceMajorVersion { get; set; }
+		public int ServiceMinorVersion { get; set; }
+		public string Status { get; set; }
+		public string SystemDevice { get; set; }
+		public string SystemDirectory { get; set; }
+		public string SystemDrive { get; set; }
+		public string Version { get; set; }
+		public string WindowsDirectory { get; set; }
 
 		public OperatingSystemInfo(int build, string caption, uint phys_memory, uint virt_memory,
 								   string name, int OSType, string user, string serial,
@@ -382,27 +428,27 @@ namespace PCStatusLib
         /// <summary>
         /// Объем памяти диска в байтах
         /// </summary>
-        public ulong Capacity { get; private set; }
+        public ulong Capacity { get; set; }
         /// <summary>
         /// Корневой каталог диска
         /// </summary>
-        public string Caption { get; private set; }
+        public string Caption { get; set; }
         /// <summary>
         /// Метка тома диска
         /// </summary>
-        public string Letter { get; private set; }
+        public string Letter { get; set; }
         /// <summary>
         /// Номер типа диска
         /// </summary>
-        public int DriveType { get; private set; }
+        public int DriveType { get; set; }
         /// <summary>
         /// Тип файловой системы диска
         /// </summary>
-        public string FileSystem { get; private set; }
+        public string FileSystem { get; set; }
         /// <summary>
         /// Объем достуного места на диске
         /// </summary>
-        public ulong FreeSpace { get; private set; }
+        public ulong FreeSpace { get; set; }
         public DiskInfo(ulong cap, string capt, string let, int drive, string file_sys, ulong free)
         {
             Capacity = cap;

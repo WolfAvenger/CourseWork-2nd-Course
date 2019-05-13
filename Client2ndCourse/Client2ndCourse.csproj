@@ -103,17 +103,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\HSE\SocketServer v2\Client\Client.csproj">
-      <Project>{4cbd74b5-1366-4737-8bb9-6d77d4665c7f}</Project>
-      <Name>Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\HSE\SocketServer v2\Server\Server.csproj">
-      <Project>{3984ca71-1201-4190-8c15-cbd26f1524e3}</Project>
-      <Name>Server</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\PCStatusLib\PCStatusLib\PCStatusLib.csproj">
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PCStatusLib\PCStatusLib.csproj">
       <Project>{d8a80287-1cdd-442e-8881-7c52de11258b}</Project>
       <Name>PCStatusLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server\Server.csproj">
+      <Project>{3984ca71-1201-4190-8c15-cbd26f1524e3}</Project>
+      <Name>Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
