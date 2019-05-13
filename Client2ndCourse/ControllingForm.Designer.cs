@@ -37,8 +37,6 @@
             this.virtmem_richTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.disks_richTextBox = new System.Windows.Forms.RichTextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.proc_richTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.sys_richTextBox = new System.Windows.Forms.RichTextBox();
             this.comps_listBox = new System.Windows.Forms.ListBox();
@@ -46,7 +44,6 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -145,26 +142,6 @@
             this.disks_richTextBox.TabStop = false;
             this.disks_richTextBox.Text = "";
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.proc_richTextBox);
-            this.groupBox4.Location = new System.Drawing.Point(296, 568);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(390, 152);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Processor\'s Activity";
-            // 
-            // proc_richTextBox
-            // 
-            this.proc_richTextBox.Location = new System.Drawing.Point(7, 21);
-            this.proc_richTextBox.Name = "proc_richTextBox";
-            this.proc_richTextBox.ReadOnly = true;
-            this.proc_richTextBox.Size = new System.Drawing.Size(377, 125);
-            this.proc_richTextBox.TabIndex = 0;
-            this.proc_richTextBox.TabStop = false;
-            this.proc_richTextBox.Text = "";
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.sys_richTextBox);
@@ -213,7 +190,6 @@
             this.Controls.Add(this.ip_label);
             this.Controls.Add(this.comps_listBox);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -225,7 +201,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -243,8 +218,6 @@
         private System.Windows.Forms.RichTextBox virtmem_richTextBox;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RichTextBox disks_richTextBox;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RichTextBox proc_richTextBox;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.RichTextBox sys_richTextBox;
         private System.Windows.Forms.ListBox comps_listBox;

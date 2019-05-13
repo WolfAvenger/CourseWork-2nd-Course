@@ -59,9 +59,9 @@ namespace Client2ndCourse
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Введенный сервер недоступен или выключен. Перезапустите программу и введите IPv4-адрес доступного сервера. " + ex.Message + " Ошибка подключения к серверу");
-                caller.Show();
-                return;
+                MessageBox.Show("You have put server's IP, which is not correct or server is not working now."+
+                    " Restart the program and input correct IP address.");
+                Environment.Exit(0);
             }
             this.Show();
 
@@ -98,7 +98,7 @@ namespace Client2ndCourse
                 //Close();
                 //sending_info.Interrupt();
                 //Environment.Exit(0);
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+                MessageBox.Show(ex.Message + Environment.NewLine);
             }
         }
 

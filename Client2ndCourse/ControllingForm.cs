@@ -25,7 +25,6 @@ namespace Client2ndCourse
         int port = 8888;
         static TcpClient client;
         static NetworkStream stream;
-        Thread getting_info;
         ConnectingForm caller;
         string current_ip = "";
         RichTextBox[] boxes;
@@ -38,7 +37,7 @@ namespace Client2ndCourse
             user_ip = my_ip;
             this.caller = caller;
             boxes = new RichTextBox[] { processes_richTextBox, disks_richTextBox, virtmem_richTextBox,
-                                        physmem_richTextBox, sys_richTextBox, proc_richTextBox };
+                                        physmem_richTextBox, sys_richTextBox };
         }
 
         private void ControllingForm_Load(object sender, EventArgs e)
@@ -193,18 +192,6 @@ namespace Client2ndCourse
             else
             {
                 physmem_richTextBox.Text = info.av_phys_mem.ToString();
-            }
-
-            if (proc_richTextBox.InvokeRequired)
-            {
-                proc_richTextBox.Invoke(new MethodInvoker(delegate
-                {
-                    proc_richTextBox.Text = info.cpu;
-                }));
-            }
-            else
-            {
-                proc_richTextBox.Text = info.cpu;
             }
 
             elems = "";

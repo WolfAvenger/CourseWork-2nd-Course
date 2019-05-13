@@ -13,7 +13,7 @@ using System.Net;
 namespace PCStatusLib
 {
 	/// <summary>
-	/// Статический класс, содержащий методы для вывода различной информации о состоянии ПК.
+	/// Статический класс, содержащий методы для сбора различной информации о состоянии ПК.
 	/// </summary>
     public static class PCStatus
     {
@@ -280,6 +280,10 @@ namespace PCStatusLib
         }
     }
 
+
+    /// <summary>
+    /// Класс, объект которого служит единицей собранных данных
+    /// </summary>
     [DataContract]
     public class CollectedInfo
     {
@@ -420,7 +424,7 @@ namespace PCStatusLib
 	}
 
     /// <summary>
-    /// Класс, предоставляющий доступ к информации о дисках ПК.
+    /// Класс, предоставляющий доступ к информации об одном жестком диске ПК.
     /// </summary>
     [Serializable]
     public class DiskInfo
