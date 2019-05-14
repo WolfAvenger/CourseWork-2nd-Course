@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
+﻿using Newtonsoft.Json;
+using PCStatusLib;
+using System;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Json;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PCStatusLib;
-using Newtonsoft.Json;
 
 namespace Client2ndCourse
 {
@@ -26,8 +17,8 @@ namespace Client2ndCourse
         static NetworkStream stream;
         double E_v = 0, E_p = 0;
         double D_v = 0, D_p = 0;
-        static int first_message_counter = 150; //не забудь поменять до 1500
-        static int message_control_count = 100; //минутный вызов
+        static int first_message_counter = 15; //не забудь поменять до 150
+        static int message_control_count = 10; //100
         int iteration = 0, iteration_1 = 0;
         bool take = true; bool is_in = false; bool alert = false; bool alert_1 = false;
         double[] phys = new double[first_message_counter], virt = new double[first_message_counter];
