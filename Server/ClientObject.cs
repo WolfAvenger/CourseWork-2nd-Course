@@ -85,17 +85,6 @@ namespace Server
             return builder.ToString();
         }
 
-        private Image GetImage()
-        {
-            byte[] data = new byte[512];
-            Image image;
-            do
-            {
-                image = Image.FromStream(Stream);
-            } while (Stream.DataAvailable);
-            return image;
-        }
-
         // закрытие подключения
         protected internal void Close()
         {
